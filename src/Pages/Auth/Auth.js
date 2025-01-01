@@ -2,7 +2,10 @@ import React, { useState, useContext } from "react";
 import classes from "./Signup.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../Utility/firebase/firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import { Type } from "../../Utility/ActionType";
 import { ClipLoader } from "react-spinners";
@@ -16,7 +19,6 @@ function Auth() {
 
   const navigate = useNavigate();
   const navStateData = useLocation();
-   
 
   const mapFirebaseError = (errorCode) => {
     const errorMessages = {
@@ -31,7 +33,7 @@ function Auth() {
   };
 
   const validateForm = () => {
-    if (!email.includes('@')) {
+    if (!email.includes("@")) {
       setError("Please enter a valid email address.");
       return false;
     }
@@ -51,12 +53,16 @@ function Auth() {
     if (action === "signin") {
       setLoading((prev) => ({ ...prev, signIn: true }));
       try {
-        const userInfo = await signInWithEmailAndPassword(auth, email, password);
+        const userInfo = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         dispatch({
           type: Type.SET_USER,
           user: userInfo.user,
         });
-         navigate(navStateData?.state?.redirect || "/");
+        navigate(navStateData?.state?.redirect || "/");
       } catch (err) {
         setError(mapFirebaseError(err.code));
         console.error("Sign in error:", err);
@@ -66,12 +72,16 @@ function Auth() {
     } else if (action === "signup") {
       setLoading((prev) => ({ ...prev, signUp: true }));
       try {
-        const userInfo = await createUserWithEmailAndPassword(auth, email, password);
+        const userInfo = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         dispatch({
           type: Type.SET_USER,
           user: userInfo.user,
         });
-         navigate(navStateData?.state?.redirect || "/");
+        navigate(navStateData?.state?.redirect || "/");
       } catch (err) {
         setError(mapFirebaseError(err.code));
         console.error("Sign up error:", err);
@@ -93,20 +103,18 @@ function Auth() {
 
       <div className={classes.login_container}>
         <h1>Sign In</h1>
-        {
-          navStateData?.state?.msg && (
-            <small
-              style={{
-                padding:"5px",
-                textAlign: "center",
-                color: "red",
-                fontWeight:"bold",
-              }}
-            >
-              {navStateData.state.msg}
-            </small>
-          )
-        }
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              padding: "5px",
+              textAlign: "center",
+              color: "red",
+              fontWeight: "bold",
+            }}
+          >
+            {navStateData.state.msg}
+          </small>
+        )}
         {error && <p className={classes.error}>{error}</p>}
         <form>
           <div>
@@ -140,7 +148,8 @@ function Auth() {
           </button>
         </form>
         <p>
-          By signing in, you agree to AMAZON FAKE CLONE's Conditions of Use & Sale. Please see our Privacy Notice.
+          By signing in, you agree to AMAZON FAKE CLONE's Conditions of Use &
+          Sale. Please see our Privacy Notice.
         </p>
         <button
           type="button"
@@ -149,9 +158,15 @@ function Auth() {
           className={classes.login_registerButton}
           disabled={loading.signUp}
         >
-          {loading.signUp ? <ClipLoader color="#000" size={15} /> : "Create your Amazon Account"}
+          {loading.signUp ? (
+            <ClipLoader color="#000" size={15} />
+          ) : (
+            "Create your Amazon Account"
+          )}
         </button>
-        {error && <small style={{ paddingTop: "5px", color: "red" }}>{error}</small>}
+        {error && (
+          <small style={{ paddingTop: "5px", color: "red" }}>{error}</small>
+        )}
       </div>
     </section>
   );
