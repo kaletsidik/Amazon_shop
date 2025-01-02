@@ -102,13 +102,17 @@
 .language {
   width: 100px;
   display: flex;
+  align-items: center; /* Center align items vertically */
   padding: 10px;
+  position: relative; /* Ensure it can be positioned correctly */
+  z-index: 10; /* Higher z-index to appear above other elements */
 }
 
 .language select {
   background-color: #1a1a1a;
   border: none;
   color: white;
+  cursor: pointer; /* Change cursor to pointer for better UX */
 }
 
 .language img {
@@ -132,9 +136,10 @@
 .order_container a:hover,
 .delivery:hover,
 .logo_container a:hover,
-.lower_container ul li:hover {
+.lower_container ul li:hover,
+.language:hover {
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid white;
-  border-radius: 3px;
 }
 
 .lower_container {
@@ -171,6 +176,6 @@
   }
 
   .language {
-    display: none;
+    display: none; /* Hide language selector on small screens */
   }
 }

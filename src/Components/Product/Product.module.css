@@ -9,10 +9,6 @@
   transition: transform 0.2s; /* Smooth scaling effect on hover */
 }
 
-/* .card_container:hover {
-  transform: scale(1.05);
-} */
-
 .card_container:hover .button {
   display: block;
 }
@@ -52,14 +48,10 @@
 .products_container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns for larger screens */
-  /* max-width: 1200px; 
-  margin: 22px auto;
-  gap: 22px; */
-
-  max-width: 985px;
-  margin: 15px auto;
-  gap: 45px;
-  justify-content: center;
+  max-width: 985px; /* Set a max width for the container */
+  margin: 15px auto; /* Center the container */
+  gap: 45px; /* Consistent gap between items */
+  justify-items: center; /* Center items in the grid */
 }
 
 .products_container section {
@@ -109,6 +101,8 @@
 
   .card_container {
     width: 100%; /* Full width for smaller screens */
+    max-width: 220px; /* Ensure it doesn't exceed original width */
+    margin: 0 auto; /* Center the card */
   }
 }
 
@@ -119,6 +113,8 @@
 
   .card_container {
     padding: 15px; /* Reduced padding for smaller screens */
+    max-width: 100%; /* Allow full width */
+    margin: 0 auto; /* Center the card */
   }
 
   .product_flexed {
